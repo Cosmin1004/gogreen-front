@@ -1,0 +1,23 @@
+.btn-create{
+   background-color: #b1dfbb;
+  }
+.btn-create .fas{
+    padding: 3px;
+}
+.map-container{
+    margin-top:5%;
+}
+
+.buttons-row{
+    justify-content: flex-end;
+    padding: 12px;
+}
+
+.user-buttons{
+    margin-right: -5%;
+}
+
+.btn-new{
+    margin-left: 90%;
+    margin-bottom: 10px;
+}

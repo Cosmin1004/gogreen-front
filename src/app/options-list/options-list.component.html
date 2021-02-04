@@ -1,0 +1,9 @@
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        {{ (!selectedValue) ? defaultValue : selectedValue}}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a *ngFor="let option of options" class="dropdown-item" (click)="selectedValueChanged(option)">{{option}}</a>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<div class="container">
+    <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">LOGIN</h2>
+
+    <!-- Icon Divider -->
+    <div class="divider-custom">
+        <div class="divider-custom-line"></div>
+        <div class="divider-custom-icon">
+            <i class="fas fa-user"></i>
+        </div>
+        <div class="divider-custom-line"></div>
+    </div>
+    <form class="loginForm" #loginForm="ngForm">
+        <div class="form-row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <div class="input-group">
+                        <input type="email" id="email" class="form-control" placeholder="Email" name="email" [(ngModel)]="userData.email">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label for="email">Password</label>
+                    <div class="input-group">
+                        <input type="password" id="password" class="form-control" placeholder="Password"
+                            name="password" [(ngModel)]="userData.password">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-12">
+                <a href="http://www.google.com">Forgot your password?</a>
+            </div>
+        </div>
+        <div *ngIf="validationMessage" class="errorMessage">{{validationMessage}}</div>
+        <div class="form-row buttonsRow">
+            <div class="col-md-2">
+                <button type="button" class="btn btn-outline-dark signup-btn" (click)="login()">Login</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,134 @@
+<user-dashboard [userActions]="companyActions">
+    <div class="map-container">
+        <div>
+            <here-map #companyMap [parentComponent]="this" [lat]="this.userService.localStorage.getItem('lat')"
+                [lng]="this.userService.localStorage.getItem('lng')" width="85%" height="630px">
+            </here-map>
+        </div>
+    </div>
+</user-dashboard>
+<ng-template #requestsModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">{{currentCitizenDisplayed.title}}'s requests</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p *ngIf="!citizenRequests || citizenRequests.length==0">There are no requests published</p>
+        <table class="table" *ngIf="citizenRequests && citizenRequests.length>0">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Action</th>
+                    <th scope="col">Date published</th>
+                    <th scope="col">Type of waste</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Collection date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let citizenRequest of citizenRequests; let i=index;">
+                    <td>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" [(ngModel)]="citizenRequest.accepted"
+                                id="{{citizenRequest.id}}">
+                            <label class="form-check-label" for="{{citizenRequest.id}}">
+                                Accept
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        {{citizenRequest.dateRequestCreated | date:'short'}}
+                    </td>
+                    <td>
+                        {{citizenRequest.materialName}}
+                    </td>
+                    <td>
+                        {{citizenRequest.quantity}}
+                    </td>
+                    <td>
+                        {{citizenRequest.unit}}
+                    </td>
+                    <td>
+                        <app-date-time-picker [disabled]="!citizenRequest.accepted" name="activeEndDate" [(ngModel)]="citizenRequest.dateRequestAccepted"></app-date-time-picker>  
+                        <validation-message [inputName]="'dateRequestAccepted'+citizenRequest.id"
+                            [validationErrors]="validationErrors">
+                        </validation-message>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('')">Cancel</button>
+        <button type="button" class="btn btn-success" (click)="processRequests()">Save</button>
+    </div>
+</ng-template>
+
+<ng-template #ordersModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">My orders</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p *ngIf="!companyOrders || companyOrders.length==0">There are no requests accepted</p>
+        <table class="table" *ngIf="companyOrders && companyOrders.length>0">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Date published</th>
+                    <th scope="col">Type of waste</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Collection date</th>
+                    <th scope="col">Citizen</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Phone number</th>
+                    <th scope="col">Finalize</th>
+                    <th scope="col">Cancel</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let companyOrder of companyOrders; let i=index;">
+                    <td>
+                        {{companyOrder.dateCreated | date:'short'}}
+                    </td>
+                    <td>
+                        {{companyOrder.materialName}}
+                    </td>
+                    <td>
+                        {{companyOrder.quantity}}
+                    </td>
+                    <td>
+                        {{companyOrder.unit}}
+                    </td>
+                    <td>
+                        {{companyOrder.dateCollection | date:'short'}}
+                    </td>
+                    <td>
+                        {{companyOrder.citizenName}}
+                    </td>
+                    <td>
+                        {{companyOrder.address}}
+                    </td>
+                    <td>
+                        {{companyOrder.phoneNumber}}
+                    </td>
+                    <td>
+                        <button class="btn btn-success" (click)="finalizeRequest(companyOrder)"><i
+                                class="fas fa-check"></i></button>
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" (click)="cancelRequest(companyOrder)"><i
+                                class="fas fa-times"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('')">Close</button>
+    </div>
+</ng-template>

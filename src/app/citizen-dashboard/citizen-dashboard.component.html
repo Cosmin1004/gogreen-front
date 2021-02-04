@@ -1,0 +1,124 @@
+<user-dashboard [userActions]="citizenActions">
+    <div class="map-container">
+        <div class="row buttons-row">
+            <div class="col-md-3 user-buttons">
+                <button class="btn btn-create" (click)="open(createRequestModal, 'lg')"><i
+                        class="fas fa-plus"></i>Create
+                    request</button>
+            </div>
+        </div>
+        <div>
+            <here-map #citizenMap [parentComponent]="this" [lat]="this.userService.localStorage.getItem('lat')" [lng]="this.userService.localStorage.getItem('lng')" width="85%" height="530px">
+            </here-map>
+        </div>
+    </div>
+</user-dashboard>
+<ng-template #createRequestModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Create request</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <button class="btn btn-success btn-new" (click)="insertNewRequest()"><i
+                class="fas fa-plus-circle"></i>New</button>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Type of waste</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let request of requests; let i=index;">
+                    <td>
+                        <options-list [options]="materials" [defaultValue]="'Material'"
+                            (onOptionChange)="request.materialName=$event"></options-list>
+                        <validation-message [inputName]="'materialName'+i" [validationErrors]="validationErrors">
+                        </validation-message>
+                    </td>
+                    <td>
+                        <input class="form-control" placeholder="Quantity" name="quantity"
+                            [(ngModel)]="request.quantity" />
+                        <validation-message [inputName]="'quantity'+i" [validationErrors]="validationErrors">
+                        </validation-message>
+                    </td>
+                    <td>
+                        <options-list [options]="units" [defaultValue]="'Unit'" (onOptionChange)="request.unit=$event">
+                        </options-list>
+                        <validation-message [inputName]="'unit'+i" [validationErrors]="validationErrors">
+                        </validation-message>
+                    </td>
+                    <td><button class="btn btn-danger" [disabled]="requests.length==1" (click)="removeRequest(i)"><i
+                                class="fas fa-trash-alt"></i></button></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('')">Cancel</button>
+        <button type="button" class="btn btn-outline-dark" (click)="saveRequests()">Publish</button>
+    </div>
+</ng-template>
+
+<ng-template #myRequestsModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">My requests</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <p *ngIf="!citizenRequests || citizenRequests.length==0">There are no requests published</p>
+        <table class="table" *ngIf="citizenRequests && citizenRequests.length>0">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Date published</th>
+                    <th scope="col">Type of waste</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Unit</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Collection date</th>
+                    <th scope="col">Recycler</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let citizenRequest of citizenRequests; let i=index;">
+                    <td>
+                        {{citizenRequest.dateRequestCreated | date:'short'}}
+                    </td>
+                    <td>
+                        {{citizenRequest.materialName}}
+                    </td>
+                    <td>
+                        {{citizenRequest.quantity}}
+                    </td>
+                    <td>
+                        {{citizenRequest.unit}}
+                    </td>
+                    <td>
+                        {{citizenRequest.status}}
+                    </td>
+                    <td>
+                        {{citizenRequest.dateRequestAccepted | date:'short'}}
+                    </td>
+                    <td>
+                        {{citizenRequest.companyName}}
+                    </td>
+                    <td>
+                        <button class="btn btn-danger" [disabled]="citizenRequest.status!='ON_HOLD'"
+                            (click)="deleteCitizenRequest(citizenRequest)"><i class="fas fa-trash"></i></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('')">Close</button>
+    </div>
+</ng-template>

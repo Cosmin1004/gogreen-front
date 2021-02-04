@@ -1,0 +1,369 @@
+<section class="page-section portfolio" id="portfolio">
+    <div class="container">
+
+        <!-- Portfolio Section Heading -->
+        <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Choose an
+            account</h2>
+
+        <!-- Icon Divider -->
+        <div class="divider-custom">
+            <div class="divider-custom-line"></div>
+            <div class="divider-custom-icon">
+                <i class="fas fa-user"></i>
+            </div>
+            <div class="divider-custom-line"></div>
+        </div>
+
+        <!-- Portfolio Grid Items -->
+        <div class="row">
+
+            <!-- Portfolio Item 1 -->
+            <div class="col-md-6 col-lg-6">
+                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal2">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white">
+                            <i class="fas fa-check-circle fa-3x" (click)="open(citizenModal)"></i>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="assets/img/citizen.png" alt="">
+                </div>
+            </div>
+
+            <!-- Portfolio Item 2 -->
+            <div class="col-md-6 col-lg-6">
+                <div class="portfolio-item mx-auto" data-toggle="modal" data-target="#portfolioModal1">
+                    <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
+                        <div class="portfolio-item-caption-content text-center text-white">
+                            <i class="fas fa-check-circle fa-3x" (click)="open(companyModal)"></i>
+                        </div>
+                    </div>
+                    <img class="img-fluid" src="assets/img/recycler.png" alt="">
+                </div>
+            </div>
+
+
+        </div>
+        <!-- /.row -->
+
+    </div>
+</section>
+
+<ng-template #companyModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Registration</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form class="signupForm" #companyForm="ngForm">
+            <div class="form-row">
+                <div class="col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label for="companyName">Name*</label>
+                        <div class="input-group">
+                            <input id="companyName" class="form-control" placeholder="Name" name="companyName"
+                                [(ngModel)]="company.companyName">
+                        </div>
+                        <div *ngIf="validationErrors.companyName" class="errorMessage">{{validationErrors.companyName}}</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label for="lastName">UIC*</label>
+                        <div class="input-group">
+                            <input id="uic" class="form-control" placeholder="UIC" name="uic" [(ngModel)]="company.uniqueCode">
+                        </div>
+                        <div *ngIf="validationErrors.uniqueCode" class="errorMessage">{{validationErrors.uniqueCode}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label for="email">E-mail*</label>
+                        <div class="input-group">
+                            <input type="companyEmail" id="email" class="form-control" placeholder="E-mail"
+                                name="companyEmail" [(ngModel)]="company.email">
+                        </div>
+                        <div *ngIf="validationErrors.email" class="errorMessage">{{validationErrors.email}}</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label for="phone">Phone number*</label>
+                        <div class="input-group">
+                            <input id="phone" class="form-control" placeholder="Phone number" name="phone"
+                                [(ngModel)]="company.companyPhoneNumber">
+                        </div>
+                        <div *ngIf="validationErrors.companyPhoneNumber" class="errorMessage">
+                            {{validationErrors.companyPhoneNumber}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <label for="phone">Street*</label>
+                        <div class="input-group">
+                            <input id="street" class="form-control" placeholder="Street" name="street"
+                                [(ngModel)]="company.street">
+                        </div>
+                        <div *ngIf="validationErrors.street" class="errorMessage">
+                            {{validationErrors.street}}</div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="phone">Number*</label>
+                        <div class="input-group">
+                            <input id="number" class="form-control" placeholder="Number" name="number"
+                                [(ngModel)]="company.number">
+                        </div>
+                        <div *ngIf="validationErrors.number" class="errorMessage">
+                                {{validationErrors.number}}</div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="phone">Building*</label>
+                        <div class="input-group">
+                            <input id="building" class="form-control" placeholder="Building" name="building"
+                                [(ngModel)]="company.building">
+                        </div>
+                        <div *ngIf="validationErrors.building" class="errorMessage">
+                                {{validationErrors.building}}</div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="phone">Entrance*</label>
+                        <div class="input-group">
+                            <input id="entrance" class="form-control" placeholder="Entrance" name="entrance"
+                                [(ngModel)]="company.entrance">
+                        </div>
+                        <div *ngIf="validationErrors.entrance" class="errorMessage">
+                                {{validationErrors.entrance}}</div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="phone">Ap. number*</label>
+                        <div class="input-group">
+                            <input id="apNumber" class="form-control" placeholder="Ap. number" name="apNumber"
+                                [(ngModel)]="company.appNumber">
+                        </div>
+                        <div *ngIf="validationErrors.appNumber" class="errorMessage">
+                                {{validationErrors.appNumber}}</div>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class="form-row" style="margin-bottom:10px">
+                <div class="col-md-6">
+                    <label>Types of waste recycled*</label>
+                    <div class="form-row">
+                        <div class="form-check form-check-inline" *ngFor="let material of materials; let i=index;">
+                            <input class="form-check-input" type="checkbox" id="{{material.name+i}}" name="{{material.name+i}}" value="material" [(ngModel)]="material.checked" [checked]="material.checked" >
+                            <label class="form-check-label" for="{{material.name+i}}">{{material.name}}</label>
+                        </div>
+                    </div>
+                    <div *ngIf="validationErrors.materialName" class="errorMessage">
+                            {{validationErrors.materialName}}</div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="form-row" style="margin-top: 7px">
+                <div class="col-md-6">
+                    <div class="form-group row">
+                        <label for="addMore" class="col-sm-3 col-form-label">Add more</label>
+                        <input class="form-control col-sm-9" id="addMore" name="addMore"
+                            [(ngModel)]="newMaterial" maxlength="20" [disabled]="materials.length==15" (keyup.enter)="addMaterial()"/>
+                    </div>
+                </div>
+                <div class="col"></div>
+                </div>
+            <div class="form-row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="description">Description*</label>
+                        <textarea class="form-control" id="description" rows="3" name="description"
+                            [(ngModel)]="company.description"></textarea>
+                    </div>
+                    <div *ngIf="validationErrors.description" style="margin-top: -15px;" class="errorMessage">{{validationErrors.description}}</div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="password">Password*</label>
+                        <div class="input-group">
+                            <input type="password" id="password" class="form-control" placeholder="Password"
+                                name="password" [(ngModel)]="company.password">
+                        </div>
+                        <div *ngIf="validationErrors.password" class="errorMessage">{{validationErrors.password}}</div>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="form-check gdprCheckbox">
+                <input name="gdprCheckbox" type="checkbox" class="form-check-input" id="isGDPRChecked"
+                    [(ngModel)]="isGDPRChecked">
+                <label class="form-check-label" for="isGDPRChecked">By using this form you agree with the storage
+                    and
+                    handling of your data by this website*</label>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+        <button type="button" class="btn btn-outline-dark signup-btn" (click)="registerCompany()"
+            [disabled]="!isGDPRChecked">Save</button>
+    </div>
+</ng-template>
+<ng-template #citizenModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Registration</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form class="signupForm" #citizenForm="ngForm">
+            <div class="form-row">
+                <div class="col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label for="firstName">First name*</label>
+                        <div class="input-group">
+                            <input id="firstName" class="form-control" placeholder="First name" name="firstName"
+                                [(ngModel)]="citizen.firstName">
+                        </div>
+                        <div *ngIf="validationErrors.firstName" class="errorMessage">{{validationErrors.firstName}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label for="lastName">Last name*</label>
+                        <div class="input-group">
+                            <input id="lastName" class="form-control" placeholder="Last name" name="lastName"
+                                [(ngModel)]="citizen.lastName">
+                        </div>
+                        <div *ngIf="validationErrors.lastName" class="errorMessage">{{validationErrors.lastName}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label for="email">E-mail*</label>
+                        <div class="input-group">
+                            <input type="email" id="email" class="form-control" placeholder="E-mail" name="email"
+                                [(ngModel)]="citizen.email">
+                        </div>
+                        <div *ngIf="validationErrors.email" class="errorMessage">{{validationErrors.email}}</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-6">
+                    <div class="form-group">
+                        <label for="phone">Phone number*</label>
+                        <div class="input-group">
+                            <input id="phone" class="form-control" placeholder="Phone number" name="phone"
+                                [(ngModel)]="citizen.citizenPhoneNumber">
+                        </div>
+                        <div *ngIf="validationErrors.citizenPhoneNumber" class="errorMessage">
+                            {{validationErrors.citizenPhoneNumber}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col-md-4 col-lg-4">
+                    <div class="form-group">
+                        <label for="phone">Street*</label>
+                        <div class="input-group">
+                            <input id="street" class="form-control" placeholder="Street" name="street"
+                                [(ngModel)]="citizen.street">
+                        </div>
+                        <div *ngIf="validationErrors.street" class="errorMessage">
+                            {{validationErrors.street}}</div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="phone">Number*</label>
+                        <div class="input-group">
+                            <input id="number" class="form-control" placeholder="Number" name="number"
+                                [(ngModel)]="citizen.number">
+                        </div>
+                        <div *ngIf="validationErrors.number" class="errorMessage">
+                                {{validationErrors.number}}</div>
+
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="phone">Building*</label>
+                        <div class="input-group">
+                            <input id="building" class="form-control" placeholder="Building" name="building"
+                                [(ngModel)]="citizen.building">
+                        </div>
+                        <div *ngIf="validationErrors.building" class="errorMessage">
+                                {{validationErrors.building}}</div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="phone">Entrance*</label>
+                        <div class="input-group">
+                            <input id="entrance" class="form-control" placeholder="Entrance" name="entrance"
+                                [(ngModel)]="citizen.entrance">
+                        </div>
+                        <div *ngIf="validationErrors.entrance" class="errorMessage">
+                                {{validationErrors.entrance}}</div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="phone">Ap. number*</label>
+                        <div class="input-group">
+                            <input id="apNumber" class="form-control" placeholder="Ap. number" name="apNumber"
+                                [(ngModel)]="citizen.appNumber">
+                        </div>
+                        <div *ngIf="validationErrors.appNumber" class="errorMessage">
+                                {{validationErrors.appNumber}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="col">
+                    <div class="form-group">
+                        <label for="password">Password*</label>
+                        <div class="input-group">
+                            <input type="password" id="password" class="form-control" placeholder="Password"
+                                name="password" [(ngModel)]="citizen.password">
+                        </div>
+                        <div *ngIf="validationErrors.password" class="errorMessage">{{validationErrors.password}}</div>
+                    </div>
+                </div>
+                <div class="col"></div>
+            </div>
+            <div class="form-check gdprCheckbox">
+                <input name="gdprCheckbox" type="checkbox" class="form-check-input" id="exampleCheck1"
+                    [(ngModel)]="isGDPRChecked">
+                <label class="form-check-label" for="exampleCheck1">By using this form you agree with the storage
+                    and
+                    handling of your data by this website*</label>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Cancel</button>
+        <button type="button" class="btn btn-outline-dark signup-btn" (click)="registerCitizen()"
+            [disabled]="!isGDPRChecked">Save</button>
+    </div>
+</ng-template>

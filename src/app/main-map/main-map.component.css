@@ -1,0 +1,13 @@
+  .header-gogreen{
+    font-family: 'Dancing Script', cursive;
+    font-size: 45px;
+    color: #45ce36;
+  }
+  .app-description{
+    padding: 10px;
+    color: white;
+    margin-inline-start: 200px;
+    margin-inline-end: 200px;
+    text-align: justify;
+  }
+ 
